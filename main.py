@@ -1,19 +1,18 @@
-import data
-import config2
-import search
-import pprint
+from pprint import pprint
+from util.data import fetch_ncm_data
+from db.chromadb import create_collection, populate_collection, search_in_collection
 
-if __name__ == "__main__":
-    csv_path = data.getData()
-    print("Data fetched successfully.")
+# 1 - Fetch data from gov (ncm 85)
+fetch_ncm_data()
 
-    config2.populate(csv_path)
-    print("Data populated into ChromaDB successfully.")
+# 2 - Create database
+collection = create_collection("ncm_85")
 
-    results = search.search("transformadores elétricos", n_results=2)
-    pprint("Search results:", results)
+# 3 - Populate database with LLM Embedding
+populate_collection("data/ncm_85.csv", collection)
 
+#4 - Search in collection
+query = "Materiais elétricos"
+results = search_in_collection(collection, query, 3)
 
-
-
-
+pprint(results)
