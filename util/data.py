@@ -8,7 +8,6 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
 def fetch_ncm_data(
-        
     url: str = NCM_API_URL,
     output_csv: str = OUTPUT_CSV,
     filter_number: str = "85",

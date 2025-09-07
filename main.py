@@ -12,7 +12,18 @@ collection = create_collection("ncm_85")
 populate_collection("data/ncm_85.csv", collection)
 
 #4 - Search in collection
-query = "Materiais elétricos"
-results = search_in_collection(collection, query, 3)
+query = "Trifásicos"
+results = search_in_collection(collection, query, 1)
 
-pprint(results)
+document = results['documents'][0][0] 
+
+codigo_ncm = results['metadatas'][0][0]['codigo_ncm']  
+
+distancia = results['distances'][0][0]
+
+print("Search results:")
+print(
+    f"document: {document}\n"
+    f"codigo_ncm: {codigo_ncm}\n"
+    f"distancia: {distancia}\n"
+)
